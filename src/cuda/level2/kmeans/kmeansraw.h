@@ -1024,10 +1024,10 @@ public:
         //checkCudaErrors(cudaEventDestroy(start));
         //checkCudaErrors(cudaEventDestroy(stop));
 
-        char atts[1024];
-        sprintf(atts, "iterations:%d, centers:%d, rank:%d", nSteps, C, R);
-        DB.AddResult("kmeans total execution time", atts, "sec", elapsed * 1.0e-3);
-        DB.AddResult("kmeans execution time per iteration", atts, "sec", elapsed * 1.0e-3 / nSteps);
+        //char atts[1024];
+        //sprintf(atts, "iterations:%d, centers:%d, rank:%d", nSteps, C, R);
+        //DB.AddResult("kmeans total execution time", atts, "sec", elapsed * 1.0e-3);
+        //DB.AddResult("kmeans execution time per iteration", atts, "sec", elapsed * 1.0e-3 / nSteps);
 
 	    if (bVerbose) {
 		    uint byteCount = (uint)(uiPointsBytes + uiCentersBytes);
