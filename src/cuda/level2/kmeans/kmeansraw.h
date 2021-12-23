@@ -967,6 +967,8 @@ public:
 	    size_t  uiClusterIdsBytes = nPoints * sizeof(int);
 	    size_t  uiClusterCountsBytes = nCenters * sizeof(int);
 
+        auto cstart = std::chrono::steady_clock::now();
+
         //INFORM(bVerbose, "Initializing data...\n");
         #ifndef UNIFIED_MEMORY
         checkCudaErrors( cudaMalloc((void **)&d_Points, uiPointsBytes ) );
@@ -983,8 +985,13 @@ public:
         #endif
 	    //INFORM(bVerbose, "Starting up kmeans-raw...\n\n");
 
+        auto cmemend = std::chrono::steady_clock::now();
+
         // fprintf(stdout, "initial centers:\n");
 	    // PrintCenters<DEFAULTRANK>(stdout, h_Centers, nCenters);
+
+        std::cout << "cudamallocmemcpy, " << std::chrono::duration_cast<std::chrono::milliseconds>(cmemend - cstart).count() << " ms" << std::endl;
+
 
         kmeansraw<R,C,CM,SM,ROWMAJ>* pKMeans = 
             new kmeansraw<R,C,CM,SM,ROWMAJ>(nSteps,
@@ -1004,6 +1011,11 @@ public:
 
         (*pKMeans).execute();
 	    checkCudaErrors( cudaDeviceSynchronize() );
+
+        auto cexec = std::chrono::steady_clock::now();
+
+        std::cout << "execution, " << std::chrono::duration_cast<std::chrono::milliseconds>(cexec - cmemend).count() << " ms" << std::endl;
+
 
         //checkCudaErrors(cudaEventRecord(stop, 0));
         //checkCudaErrors(cudaEventSynchronize(stop));
@@ -1133,11 +1145,14 @@ public:
         bool bVerbose
         )
     {
+        auto cstart = std::chrono::steady_clock::now();
+
         int nP = 0;
         int nD = 0;
         std::vector<pt<R>> points;
         std::vector<pt<R>> centers;
         std::vector<pt<R>> refcenters;
+
 
         ReadInput(lpszInputFile, points, &nP, &nD, 0);
 	    if (points.size()==0) {
@@ -1197,6 +1212,10 @@ public:
 				*pCenters++ = *vi;
             }
 
+
+            auto cend = std::chrono::steady_clock::now();
+
+            std::cout << "read_input, " << std::chrono::duration_cast<std::chrono::milliseconds>(cend - cstart).count() << " ms" << std::endl;
 
 			//fprintf(stdout, "initial centers:\n");
 			//PrintCenters<DEFAULTRANK>(stdout, h_Centers, nCenters);

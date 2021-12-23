@@ -188,6 +188,11 @@ int main(int argc, char *argv[])
     //cudaSetDevice(0);
     cudaFree(0);
 
+    auto cuda_ctx_end = std::chrono::steady_clock::now();
+
+    std::cout << "cuda init " << std::chrono::duration_cast<std::chrono::milliseconds>(cuda_ctx_end - cstart).count() << " ms" << std::endl;
+
+
     try
     {
         // Get args

@@ -2,7 +2,7 @@
 #include "ResultDatabase.h"
 #include "cudacommon.h"
 
-
+#include <chrono>
 
 #include <stdio.h>
 #include <iostream>
