@@ -995,27 +995,22 @@ public:
                                             nPoints,
                                             nCenters);
 
-        float elapsed;
+        float elapsed = 0;
         cudaEvent_t start, stop;
-        checkCudaErrors(cudaEventCreate(&start));
-        checkCudaErrors(cudaEventCreate(&stop));
+        //checkCudaErrors(cudaEventCreate(&start));
+        //checkCudaErrors(cudaEventCreate(&stop));
 
-        checkCudaErrors(cudaEventRecord(start, 0));
-
-        auto cstart = std::chrono::steady_clock::now();
+        //checkCudaErrors(cudaEventRecord(start, 0));
 
         (*pKMeans).execute();
 	    checkCudaErrors( cudaDeviceSynchronize() );
 
-        auto cend = std::chrono::steady_clock::now();
-        std::cout << "end to end " << std::chrono::duration_cast<std::chrono::milliseconds>(cend - cstart).count() << " ms" << std::endl;
+        //checkCudaErrors(cudaEventRecord(stop, 0));
+        //checkCudaErrors(cudaEventSynchronize(stop));
+        //checkCudaErrors(cudaEventElapsedTime(&elapsed, start, stop));
 
-        checkCudaErrors(cudaEventRecord(stop, 0));
-        checkCudaErrors(cudaEventSynchronize(stop));
-        checkCudaErrors(cudaEventElapsedTime(&elapsed, start, stop));
-
-        checkCudaErrors(cudaEventDestroy(start));
-        checkCudaErrors(cudaEventDestroy(stop));
+        //checkCudaErrors(cudaEventDestroy(start));
+        //checkCudaErrors(cudaEventDestroy(stop));
 
         char atts[1024];
         sprintf(atts, "iterations:%d, centers:%d, rank:%d", nSteps, C, R);

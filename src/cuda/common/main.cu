@@ -18,6 +18,8 @@
 #include "Utility.h"
 #include "cudacommon.h"
 
+#include <chrono>
+
 using namespace std;
 
 // Forward Declarations
@@ -181,7 +183,9 @@ int main(int argc, char *argv[])
 {
     int ret = 0;
 
-    cudaSetDevice(0);
+    auto cstart = std::chrono::steady_clock::now();
+
+    //cudaSetDevice(0);
     cudaFree(0);
 
     try
@@ -268,6 +272,11 @@ int main(int argc, char *argv[])
                 ofs.close();
             }
         }
+
+        auto cend = std::chrono::steady_clock::now();
+        std::cout << "end to end " << std::chrono::duration_cast<std::chrono::milliseconds>(cend - cstart).count() << " ms" << std::endl;
+
+
     }
     catch( std::exception& e )
     {
