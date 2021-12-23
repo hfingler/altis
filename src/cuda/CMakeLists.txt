@@ -15,8 +15,12 @@ set(exe_files
     ${CMAKE_CURRENT_LIST_DIR}/common/main.cu
 )
 
+#set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS} --ptxas-options=-v")
+#set(CMAKE_CUDA_FLAGS "${CMAKE_CUDA_FLAGS}  --cudart shared")
+set(CMAKE_CUDA_RUNTIME_LIBRARY "Shared")
+
 add_compile_options(-w) # temporarily surpress warnings
 
-add_subdirectory(level0)
-add_subdirectory(level1)
+#add_subdirectory(level0)
+#add_subdirectory(level1)
 add_subdirectory(level2)

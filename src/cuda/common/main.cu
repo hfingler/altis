@@ -49,6 +49,7 @@ void RunBenchmark(ResultDatabase &resultDB, OptionParser &op);
 //   exits, but our results go to the console.
 //
 // ****************************************************************************
+/*
 void EnumerateDevicesAndChoose(int chooseDevice, bool properties, bool quiet)
 {
     cudaSetDevice(chooseDevice);
@@ -154,7 +155,7 @@ void checkCudaFeatureAvailability(OptionParser &op) {
             safe_exit(-1);
         }
     }
-}
+}*/
 
 // ****************************************************************************
 // Function: main
@@ -179,6 +180,9 @@ void checkCudaFeatureAvailability(OptionParser &op) {
 int main(int argc, char *argv[])
 {
     int ret = 0;
+
+    cudaSetDevice(0);
+    cudaFree(0);
 
     try
     {
@@ -219,7 +223,10 @@ int main(int argc, char *argv[])
         bool properties = op.getOptionBool("properties");
         bool quiet = op.getOptionBool("quiet");
         string metricsfile = op.getOptionString("metricsFile");
+        
+        
 
+        /*
         int device;
         device = op.getOptionVecInt("device")[0];
         int deviceCount;
@@ -229,16 +236,17 @@ int main(int argc, char *argv[])
             " out of range, defaulting to device 0.\n";
             device = 0;
         }
+        */
 
         // Initialization
-        EnumerateDevicesAndChoose(device, properties, quiet);
-        if (properties)
-        {
-            return 0;
-        }
+        //EnumerateDevicesAndChoose(device, properties, quiet);
+        //if (properties)
+        //{
+        //    return 0;
+        //}
 
         // Check CUDA feature availability
-        checkCudaFeatureAvailability(op);
+        //checkCudaFeatureAvailability(op);
 
         ResultDatabase resultDB;
 

@@ -118,15 +118,15 @@ void addBenchmarkSpecOptions(OptionParser &op) {
     op.addOption("verify", OPT_BOOL, "0", "verify the results computed on host");
     op.addOption("rank", OPT_INT, "16", "An integer-valued rank");
     op.addOption("centers", OPT_INT, "64", "An integer-valued centers argument");
-    op.addOption("steps", OPT_INT, "1000", "An integer-valued number of steps");
+    op.addOption("steps", OPT_INT, "2000", "An integer-valued number of steps");
     op.addOption("type", OPT_STRING, "raw", "A valid version of kmeans");
     op.addOption("seed", OPT_INT, "0", "seed for rand gen");
     // op.addOption("cpu", OPT_BOOL, "0", "perform accumulation on CPU instead");
 }
 
 void RunBenchmark(ResultDatabase &DB, OptionParser &op) {
-    int dev = op.getOptionInt("device");
-    CUDA_SAFE_CALL(cudaSetDevice(dev));
+    //int dev = op.getOptionInt("device");
+    //CUDA_SAFE_CALL(cudaSetDevice(dev));
     g_nRank = op.getOptionInt("rank");
     g_nCenters = op.getOptionInt("centers");
     g_nSteps = op.getOptionInt("steps");

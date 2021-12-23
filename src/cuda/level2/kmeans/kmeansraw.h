@@ -21,7 +21,7 @@
 #include <assert.h>
 #include <cfloat>
 #include <iostream>
-
+#include <chrono>
 
 typedef double (*LPFNKMEANS)(ResultDatabase &DB,
     const int nSteps,
@@ -1002,8 +1002,13 @@ public:
 
         checkCudaErrors(cudaEventRecord(start, 0));
 
+        auto cstart = std::chrono::steady_clock::now();
+
         (*pKMeans).execute();
 	    checkCudaErrors( cudaDeviceSynchronize() );
+
+        auto cend = std::chrono::steady_clock::now();
+        std::cout << "end to end " << std::chrono::duration_cast<std::chrono::milliseconds>(cend - cstart).count() << " ms" << std::endl;
 
         checkCudaErrors(cudaEventRecord(stop, 0));
         checkCudaErrors(cudaEventSynchronize(stop));
