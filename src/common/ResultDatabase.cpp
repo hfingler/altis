@@ -311,6 +311,7 @@ void ResultDatabase::DumpDetailed(ostream &out)
 // ****************************************************************************
 void ResultDatabase::DumpSummary(ostream &out)
 {
+    return;
     std::vector<size_t> ColumnWidths = setColumnWidth(NUM_COL);
     auto maxColWidth = *max_element(std::begin(ColumnWidths), std::end(ColumnWidths));
 

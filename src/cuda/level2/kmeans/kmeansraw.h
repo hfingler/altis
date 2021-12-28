@@ -990,7 +990,7 @@ public:
         // fprintf(stdout, "initial centers:\n");
 	    // PrintCenters<DEFAULTRANK>(stdout, h_Centers, nCenters);
 
-        std::cout << "cudamallocmemcpy, " << std::chrono::duration_cast<std::chrono::milliseconds>(cmemend - cstart).count() << " ms" << std::endl;
+        //std::cout << "cudamallocmemcpy, " << std::chrono::duration_cast<std::chrono::milliseconds>(cmemend - cstart).count() << " ms" << std::endl;
 
 
         kmeansraw<R,C,CM,SM,ROWMAJ>* pKMeans = 
