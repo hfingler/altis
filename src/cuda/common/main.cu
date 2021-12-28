@@ -190,8 +190,12 @@ int main(int argc, char *argv[])
 
     auto cuda_ctx_end = std::chrono::steady_clock::now();
 
+<<<<<<< HEAD
     std::cout << "cuda init, " << std::chrono::duration_cast<std::chrono::milliseconds>(cuda_ctx_end - cstart).count() << " ms" << std::endl;
 
+=======
+    std::cout << "cuda_init, " << std::chrono::duration_cast<std::chrono::milliseconds>(cuda_ctx_end - cstart).count() << " ms" << std::endl;
+>>>>>>> temp2
 
     try
     {
@@ -279,7 +283,7 @@ int main(int argc, char *argv[])
         }
 
         auto cend = std::chrono::steady_clock::now();
-        std::cout << "end to end, " << std::chrono::duration_cast<std::chrono::milliseconds>(cend - cstart).count() << " ms" << std::endl;
+        std::cout << "end-to-end, " << std::chrono::duration_cast<std::chrono::milliseconds>(cend - cstart).count() << " ms" << std::endl;
 
 
     }
